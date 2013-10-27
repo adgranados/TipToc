@@ -7,6 +7,7 @@ Buscas algo, pregunta. Lo tienes, responde.
 
 
 Para montarlo en un PC:
+
   Una vez descargado el proyecto, abrir el home.html.
 
 Para probarlo desde un dispositivo movil (Android):
