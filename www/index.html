@@ -39,7 +39,7 @@
             </div>
             <div data-role="content" >
                 <audio src="sounds/bell.mp3" id="bellSound" preload="auto"></audio>
-                <a href="javascript:void(0)" id="play" data-role="button" data-theme="d">Reporducior</a>
+                <!--a href="javascript:void(0)" id="play" data-role="button" data-theme="d">Reporducior</a -->
                 <br/>
 
                 <div id="message" style="font-size:36px;text-align:center;"></div>
@@ -151,68 +151,8 @@
             </div>
             <div data-role="content" >
                 
-               <ul data-role="listview" data-inset="true">
-                    <li>
-                        <a href="#">
-                            <img src="img/bolsa.jpg">
-                            <h2>Broken Bells</h2>
-                            <p>Broken Bells</p><span class="ui-li-count">5</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/pantalones.jpg" />
-                            <h2>Warning</h2>
-                            <p>Hot Chip</p><span class="ui-li-count">5</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/pantalon.jpg" />
-                            <h2>Wolfgang Amadeus Phoenix</h2>
-                            <p>Phoenix</p><span class="ui-li-count">4</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/bolsa.jpg" />
-                            <h2>Broken Bells</h2>
-                            <p>Broken Bells</p><span class="ui-li-count">4</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/pantalones.jpg" />
-                            <h2>Warning</h2>
-                            <p>Hot Chip</p><span class="ui-li-count">3</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/pantalon.jpg" />
-                            <h2>Wolfgang Amadeus Phoenix</h2>
-                            <p>Phoenix</p><span class="ui-li-count">3</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/bolsa.jpg" />
-                            <h2>Broken Bells</h2>
-                            <p>Broken Bells</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="img/pantalones.jpg" />
-                        <h2>Warning</h2>
-                        <p>Hot Chip</p></a>
-                    </li>
-                    <li><a href="#">
-                        <img src="img/pantalon.jpg" />
-                        <h2>Wolfgang Amadeus Phoenix</h2>
-                        <p>Phoenix</p></a>
-                    </li>
-                </ul>     
+                <ul id="options" data-role="listview" data-inset="true">
+                </ul>    
 
             </div>
             <div data-role="footer" data-theme = "d" class="ui-bar" data-position="fixed" data-id="footer1">
@@ -267,7 +207,7 @@
                 $(function(){
                     $("#calculo").hide();
                     $("#borrarvendedor").hide();
-                    $("#enviarvendedor_responder").hide();
+                    //$("#enviarvendedor_responder").hide();
                     $("#calcular_responder").click(function(){
                         $("#calculo").show();
                         $("#borrarvendedor_response").show();
@@ -282,11 +222,11 @@
                 <a href="#vendedorhome">Vendedor</a>
             </div>
             <div data-role="content">
-                <h3>Requerimiento:</h3>
-                <p>Necesito un Levis azul indigo</p>
+                <h3>Lo que necesita tu cliente:</h3>
+                <p id="textQuestion"></p>
                 <br />
-                <h3>Oferta:</h3>
-                <textarea cols="40" rows="8" name="textarea-1" id="textarea-oferta"></textarea>
+                <h3>Que le ofreces:</h3>
+                <textarea cols="40" rows="8" name="textarea-oferta" id="textarea-oferta"></textarea>
                 <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="d" data-inline="true">Plus</a>
                 <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="d" data-inline="true">Minus</a>
                 <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" data-inline="true">Delete</a>
@@ -308,8 +248,8 @@
                     </fieldset>
                 </div>
 
-                <a href="#" data-role="button" id="calcular_responder" onclick="javascript:void(0)" data-icon="gear" data-theme="d">Calcular</a>
-                <a href="#resultados" data-role="button" id="enviarvendedor_responder" onclick="javascript:void(0)" data-icon="forward" data-theme="d">Enviar</a>
+                <!-- a href="#" data-role="button" id="calcular_responder" onclick="javascript:void(0)" data-icon="gear" data-theme="d">Calcular</a -->
+                <a href="javascript:void(0)" data-role="button" id="enviarvendedor_responder" data-icon="forward" data-theme="d">Enviar</a>
             </div>
 
             <div data-role="footer" data-theme = "a" class="ui-bar" data-position="fixed">

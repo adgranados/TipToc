@@ -92,12 +92,14 @@ $(function(){
             //msg = JSON.stringify(msg)
             var status = msg["status"];
             var user_type = msg["type"];
+            var userName = msg["userName"];
 
             if(status == "ok"){
                 var sound = $("#bellSound")
                 sound[0].play()
                 sessionStorage.setItem("login", status);
                 sessionStorage.setItem("user_type", user_type);
+                sessionStorage.setItem("userName",userName);
                 
                 if(user_type == "vendedor"){
                     $.mobile.navigate("#vendedorhome");
@@ -172,29 +174,27 @@ $(function(){
 
                 $("#listCategories fieldset").append(checkbox);
             });
-            $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+            //$("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
         });
 
         var tiptoc = {
-        sendQuestion:function(){
-            var question = $("#question").val()
-            socket.emit("question",{q:question,location:null})
-        },
-        questionCategories:function(q_split){
-            var questionCategoriesChecked = $("#listCategories fieldset input:checked")
-            var listCategoriesChecked = []
-            $.each(questionCategoriesChecked,function(index, data){
-                listCategoriesChecked[index] = data.value;
-            });
+            sendQuestion:function(){
+                var question = $("#question").val()
+                socket.emit("question",{q:question,location:null})
+            },
+            questionCategories:function(q_split){
+                var questionCategoriesChecked = $("#listCategories fieldset input:checked")
+                var listCategoriesChecked = []
+                $.each(questionCategoriesChecked,function(index, data){
+                    listCategoriesChecked[index] = data.value;
+                });
 
-            q_split = sessionStorage.getItem("q_split")
-            q_split = q_split.split(",");
-            socket.emit("question_categories",{q_split:q_split,categories_selected:listCategoriesChecked});
-        }
-        /*oncategories:function(){
-            var question = $("#question").val()
-            socket.send(question)
-        }*/
+                q_split = sessionStorage.getItem("q_split")
+                q_split = q_split.split(",");
+                socket.emit("question_categories",{q_split:q_split,categories_selected:listCategoriesChecked});
+
+                $.mobile.navigate("#resultados");
+            }
         }
 
         $("#send").click(function(){
@@ -209,20 +209,72 @@ $(function(){
     });    
 
     $(document).on("pageinit","#vendedorhome",function(event){
+
         checkAuth();
         socket.on('new_pulling_question', function (data) {
-            $("[data-role=listview]").eq(1).children().eq(0).after('<li><a href="index.html"><h3>'+data.username+'</h3><p><strong>'+data.q+'</strong></p><p>'+data.date+'</p><p class="ui-li-aside"><strong>6:24</strong>PM</p></a></li>');
+            dataStr = JSON.stringify(data);
+            //sessionStorage.setItem("username_comprador",data.username)
+            $("[data-role=listview]").eq(1).children().eq(0).after('<li><a data-msj=\''+dataStr+'\' href="javascript:void(0)" class="question"><h3>'+data.username+'</h3><p><srtong>'+data.q+'</strong></p><p>'+data.date+'</p><p class="ui-li-aside"><strong>6:24</strong>PM</p></a></li>');
             $("[data-role=listview]").eq(1).listview('refresh');
+
+            $(".question").click(function(e){
+                data = $(this).attr("data-msj")
+                sessionStorage.setItem("dataQuestion",data);
+                $.mobile.navigate("#vendedorresponder");
+            })
         });
-    });    
+
+    });  
+
+     $(document).on("pageinit","#vendedorresponder",function(event){
+
+        checkAuth();
+        var dataQuestion = sessionStorage.getItem("dataQuestion");
+        dataQuestion = JSON.parse(dataQuestion);
+        
+        
+        var question = dataQuestion["q"];
+        var userNameComprador = dataQuestion["username"];
+        var dateRequest = dataQuestion["date"];
+        var login = sessionStorage.getItem("userName");
+        
+        $("#textQuestion").html(question)
+
+        var msjVendedor = $("textarea-oferta").val()
+
+        var tiptoc = {
+            response_to_client:function(msgVendedor,userNameComprador,login){
+                socket.emit("response_to_client",{msgvendedor:msgVendedor,comprador_username:userNameComprador,vendedor_username:login})
+
+                $.mobile.navigate("#vendedorhome");  
+
+            }
+        }
+
+
+        $("#enviarvendedor_responder").click(function(){
+            msgVendedor = $("#textarea-oferta").val()
+            tiptoc.response_to_client(msgVendedor,userNameComprador,login)
+        });
+
+    });     
 
     $(document).on("pageinit","#resultados",function(event){
         checkAuth();
+
+         socket.on('send_response', function (data) {
+            console.log(data)            
+            $("#options").append("<li><a href='#'><h2>"+ data.vendedor_username +"</h2><p>" + data.msgvendedor + "</p><span class='ui-li-count'>1</span></a></li>")
+
+
+                
+
+
+
+        });
     });    
 
-    $(document).on("pageinit","#vendedorresponder",function(event){
-        checkAuth();
-    });    
+    
 
    
 
