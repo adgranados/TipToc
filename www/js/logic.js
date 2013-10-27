@@ -34,7 +34,7 @@ try{
     connected = false;
     setTimeout(function(){window.location.reload()},3000)
 }
-    if(socket == null){
+    if(socket == null){ 
       var start = new Date().getTime();
     
         for (var i = 0; i < 1e7; i++) {
