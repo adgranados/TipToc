@@ -172,13 +172,7 @@ $(function(){
 
                 $("#listCategories fieldset").append(checkbox);
             });
-            $("#listCategories fieldset").controlgroup("refresh")
-        });
-        socket.on('new_pulling_question', function (data) {
-            /*console.log(data.q)
-            console.log(data.username)
-            console.log(data.date)*/
-            alert(data.q);
+            $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
         });
 
         var tiptoc = {
@@ -216,6 +210,10 @@ $(function(){
 
     $(document).on("pageinit","#vendedorhome",function(event){
         checkAuth();
+        socket.on('new_pulling_question', function (data) {
+            $("[data-role=listview]").eq(1).children().eq(0).after('<li><a href="index.html"><h3>'+data.username+'</h3><p><strong>'+data.q+'</strong></p><p>'+data.date+'</p><p class="ui-li-aside"><strong>6:24</strong>PM</p></a></li>');
+            $("[data-role=listview]").eq(1).listview('refresh');
+        });
     });    
 
     $(document).on("pageinit","#resultados",function(event){
