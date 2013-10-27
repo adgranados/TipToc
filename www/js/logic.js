@@ -73,12 +73,8 @@ $(function(){
                 tiptoc.login()
             });
             $("#play").click(function(e){
-
-                var snd = new Media("sounds/bell.mp3");
-                snd.play();
-
-                //var sound = $("#bellSound")
-                //sound[0].play()
+                var sound = $("#bellSound")
+                sound[0].play()
             });
 
         });
@@ -89,9 +85,16 @@ $(function(){
         checkAuth();
     });    
 
-        $(document).on("pageinit","#vendedorhome",function(event){
+    $(document).on("pageinit","#vendedorhome",function(event){
         checkAuth();
     });    
 
+    $(document).on("pageinit","#resultados",function(event){
+        checkAuth();
+    });    
+
+    $(document).on("pageinit","#vendedorresponder",function(event){
+        checkAuth();
+    });    
 
 });
