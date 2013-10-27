@@ -6,6 +6,8 @@ Buscas algo, pregunta. Lo tienes, responde.
 
 
 
+<h1>Si quieres ver funcionando la aplicación, tienes las siguientes opciones: </h1>
+
 * Para montarlo en un PC:
 
   Una vez descargado el proyecto, abrir el home.html.
