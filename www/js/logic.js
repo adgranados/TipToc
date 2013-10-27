@@ -73,8 +73,12 @@ $(function(){
                 tiptoc.login()
             });
             $("#play").click(function(e){
-                var sound = $("#bellSound")
-                sound[0].play()
+
+                var snd = new Media("sounds/bell.mp3");
+                snd.play();
+
+                //var sound = $("#bellSound")
+                //sound[0].play()
             });
 
         });
