@@ -264,7 +264,7 @@ $(function(){
 
          socket.on('send_response', function (data) {
             $("#options").append("<li><a href='#'><h2>"+ data.vendedor_username +"</h2><p>" + data.msgvendedor + "</p><span class='ui-li-count'>1</span></a></li>");
-            $("#options").eq(1).listview('refresh');
+            $("#options").listview('refresh');
         });
     });    
 
