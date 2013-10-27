@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Client</title>
+	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script src="http://174.129.225.176/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var socket = io.connect('http://174.129.225.176/');
+		socket.on('connect', function () {
+		   	socket.send('hi');
+	    	socket.on('message', function (msg) {
+	    		$("#message").html(msg)
+	    	});
+		});
+		
+
+		$(function(){
+			var tiptoc = {
+				sendMessage:function(){
+					var msg = $("#buscar").val()
+					socket.send(msg)
+				},
+				login:function(){
+					var login = $("#buscar").val()
+					socket.emit('login',{id:login})
+				}
+			}
+			$("#Btn_send").click(function(e){
+				tiptoc.sendMessage()
+			});
+			$("#Btn_login").click(function(e){
+				tiptoc.login()
+			});
+			
+		})
+	</script>
+</head>
+<body>
+	<div id="message"></div>
+
+
+<input type="text" id="buscar">
+<a href="javascript:void()" id="Btn_send">Envia</a>
+<a href="javascript:void()" id="Btn_login">Login</a>
+</body>
+</html>
