@@ -17,3 +17,13 @@ Buscas algo, pregunta. Lo tienes, responde.
   Actualmente esta funcionando solo para android, el QR se encuentra en la raiz del proyecto, o 
   descargar el siguiente archivo:
   https://build.phonegap.com/apps/617379/download/android/?qr_key=az54rWpALogyQQkxvr3f
+
+Los datos de acceso para pruebas son:
+
+Cliente:
+* username: lucerovivas<br/>
+  password: lucerovivas
+
+Vendedor: 
+* username: totto<br/>
+  password: totto
