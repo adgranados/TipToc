@@ -27,13 +27,16 @@ $(function(){
         else if(sessionStorage.getItem("login") == undefined)
             $.mobile.navigate("#login");
     }
-var socket = null;
-try{
-    socket = io.connect(hostServer);
-} catch(err){
-    connected = false;
-    setTimeout(function(){window.location.reload()},3000)
-}
+
+    var socket = null;
+    try{
+        socket = io.connect(hostServer);
+    } catch(err){
+        connected = false;
+        setTimeout(function(){window.location.reload()},3000)
+    }
+
+
     if(socket == null){ 
       var start = new Date().getTime();
     
@@ -147,10 +150,67 @@ try{
 
     $(document).on("pageinit","#inicio",function(event){
         checkAuth();
-
-        $("buscar").click(function(){
-            tiptoc.login()
+         
+        socket.on('sendQuestion', function (msg) {
+            console.log(msg);
         });
+
+
+        socket.on('sendQuestion', function (msg) {
+            console.log(msg);
+        });
+        socket.on('categories', function (msg) {
+            //console.log(msg.q_split);
+            //console.log(msg.categories);
+            //categoriesNumber = msg.categories.length;
+            sessionStorage.setItem("q_split",msg.q_split)
+
+            $.each(msg.categories,function(index, value){
+                //console.log(index)
+                //console.log(value)
+                var checkbox = '<input type="checkbox" name="categorie-'+ index + '" id="categorie-' + index + '" value="' + value + '"/> <label for="checkbox-' + index  + '">' + value + '</label>';
+
+                $("#listCategories fieldset").append(checkbox);
+            });
+            $("#listCategories fieldset").controlgroup("refresh")
+        });
+        socket.on('new_pulling_question', function (data) {
+            /*console.log(data.q)
+            console.log(data.username)
+            console.log(data.date)*/
+            alert(data.q);
+        });
+
+        var tiptoc = {
+        sendQuestion:function(){
+            var question = $("#question").val()
+            socket.emit("question",{q:question,location:null})
+        },
+        questionCategories:function(q_split){
+            var questionCategoriesChecked = $("#listCategories fieldset input:checked")
+            var listCategoriesChecked = []
+            $.each(questionCategoriesChecked,function(index, data){
+                listCategoriesChecked[index] = data.value;
+            });
+
+            q_split = sessionStorage.getItem("q_split")
+            q_split = q_split.split(",");
+            socket.emit("question_categories",{q_split:q_split,categories_selected:listCategoriesChecked});
+        }
+        /*oncategories:function(){
+            var question = $("#question").val()
+            socket.send(question)
+        }*/
+        }
+
+        $("#send").click(function(){
+            tiptoc.sendQuestion()
+        });
+
+
+        $("#search").click(function(){
+           tiptoc.questionCategories() 
+        })
 
     });    
 

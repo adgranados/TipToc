@@ -30,7 +30,7 @@
         <!-- *********************************************************************************************** -->
         <!-- ******************************************** LOGIN ******************************************** -->
         <!-- *********************************************************************************************** -->
-        <div id="login" data-role="page" data-theme="d" >
+        <div data-role="page" data-theme="d" id="login" >
             <div data-role="header" data-theme="d">
                 <h3>TipToc</h3>
                 <a href="#inicio" rel="external">Comprador</a>
@@ -70,7 +70,7 @@
         <!-- *********************************************************************************************** -->
         <!-- ***************************************** TRYCONNECT ****************************************** -->
         <!-- *********************************************************************************************** -->
-        <div id="tryconnect" data-role="page" data-theme="d" >
+        <div data-role="page" data-theme="d" id="tryconnect">
             <div data-role="header" data-theme="d">
                 <h3>TipToc</h3>
                 <a href="#inicio" rel="external">Comprador</a>
@@ -89,6 +89,19 @@
         <!-- **************************************** PAGINA INICIO **************************************** -->
         <!-- *********************************************************************************************** -->
         <div data-role="page" data-theme ="d" id="inicio">
+            <script type="text/javascript">
+                $(function(){
+                    //$("#list").hide();
+                    $("#borrar").hide();
+                    $("#buscar").hide();
+                    $("#enviar").click(function(){
+                        $("#list").show();
+                        $("#borrar").show();
+                        $("#enviar").hide();
+                        $("#buscar").show();
+                    })
+                })
+            </script>
             <div data-role="header" data-theme="d">
                 <h3>TipToc</h3>
                 <a href="#inicio" rel="external">Comprador</a>
@@ -98,32 +111,29 @@
                 
                 <form style="width:100%; text-align:center" id="sendQuestion" method="post" action="#">
                     <label for="textarea-1" >Que necesitas?</label>
-                    <textarea cols="40" rows="8" name="textarea-1" id="textarea-1"></textarea>
+                    <textarea cols="40" rows="8" name="question" id="question"></textarea>
                     <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="d" data-inline="true">Plus</a>
                     <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="d" data-inline="true">Minus</a>
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" data-inline="true">Delete</a>
                     <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d" data-inline="true">Arrow left</a>
                     
-                    <div id="list">
-                       <fieldset data-role="controlgroup">
+
+                    <div id="listCategories">
+                       <fieldset data-role="controlgroup" id="fieldserListCategories" data-theme="f">
                             <legend>Categorías</legend>
-                            <input type="checkbox" name="checkbox-t-2a" id="checkbox-t-2a" />
-                            <label for="checkbox-t-2a">Ropa</label>
-                            <input type="checkbox" name="checkbox-t-2b" id="checkbox-t-2b" data-theme="d" />
-                            <label for="checkbox-t-2b">Pantalones</label>
-                            <input type="checkbox" name="checkbox-t-2c" id="checkbox-t-2c" data-theme="d" />
-                            <label for="checkbox-t-2c">Finanzas</label>
+                                                        
                         </fieldset>
                     </div>
 
-                    <a href="#" data-role="button" id="enviar" onclick="javascript:void()" data-icon="gear" data-theme="d">Enviar</a>
-                    <a href="#resultados" data-role="button" id="buscar" onclick="javascript:void()" data-icon="forward" data-theme="d">Buscar</a>
+
+                    <a href="javascript:void(0)" data-role="button" id="send" data-icon="gear" data-theme="d">Enviar</a>
+                    <a href="javascript:void(0)" data-role="button" id="search" data-icon="forward" data-theme="d">Buscar</a>
                 </form>
             </div>
 
 
             <div data-role="footer" data-theme = "d" class="ui-bar" data-position="fixed" data-id="footer1">
-                <a href="#pagina2" data-icon="delete" id="borrar" onclick="javascript:void()">Borrar</a>
+                <a href="javascript:void(0)" data-icon="delete" id="borrar" >Borrar</a>
                 <a href="#pagina2" data-icon = "forward">Compartir</a>
             </div>
         </div>
@@ -223,14 +233,12 @@
                <div class="content-primary">
                         
                 <ul data-role="listview" data-theme="e" data-divider-theme="e">
-                    <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+                    <li data-role="list-divider"><span id="requestDate">---</span><span class="ui-li-count">2</span></li>
                     <li><a href="index.html">
-                        
                             <h3>Stephen Weber</h3>
                             <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
                             <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
                             <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-                        
                     </a></li>
                     <li><a href="index.html">
                         
@@ -377,19 +385,7 @@
 
 
 
-         <script type="text/javascript">
-            $(function(){
-                $("#list").hide();
-                $("#borrar").hide();
-                $("#buscar").hide();
-                $("#enviar").click(function(){
-                    $("#list").show();
-                    $("#borrar").show();
-                    $("#enviar").hide();
-                    $("#buscar").show();
-                })
-            })
-        </script>
+        
 
         <script type="text/javascript">
             $(function(){
