@@ -6,7 +6,7 @@ Buscas algo, pregunta. Lo tienes, responde.
 
 
 
-<h1>Si quieres ver funcionando la aplicación, tienes las siguientes opciones: </h1>
+<h3>Si quieres ver funcionando la aplicación, tienes las siguientes opciones: </h3>
 
 * Para montarlo en un PC:
 
