@@ -18,22 +18,7 @@
 	<script src="http://174.129.225.176/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		$(function(){
-
-
-			// alerta cerrada
-		    
-		    // Muestra un cuadro de dialogo personalizado
-		    function showMessageAuthFail() {
-			    /*navigator.notification.alert(
-			    'Usuario no registrado',     // mensaje (message)
-			    'Login Error',            // titulo (title)
-			    'OK'                // nombre del botón (buttonName)
-			    );*/
-
-			    //navigator.notification.vibrate(2000);
-			 
-
-		    }
+			
 
 			var socket = io.connect('http://174.129.225.176/');
 			socket.on('connect', function () {
@@ -56,7 +41,13 @@
 	    					$.mobile.navigate("#inicio");
 		    			}
 		    		}else{
-		    			showMessageAuthFail();
+		    			/*navigator.notification.alert(
+					    'Usuario no registrado',     // mensaje (message)
+					    'Login Error',            // titulo (title)
+					    'OK'                // nombre del botón (buttonName)
+					    );*/
+
+					    //navigator.notification.vibrate(2000);
 		    		}
 		    		$("#message").html(status)
 		    	});
